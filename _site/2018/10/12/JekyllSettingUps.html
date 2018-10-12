@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>用Jekyll配置GitHub Pages上自己的博客 | Your awesome title</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="用Jekyll配置GitHub Pages上自己的博客" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="前言" />
+<meta property="og:description" content="前言" />
+<link rel="canonical" href="http://localhost:4000/2018/10/12/JekyllSettingUps.html" />
+<meta property="og:url" content="http://localhost:4000/2018/10/12/JekyllSettingUps.html" />
+<meta property="og:site_name" content="Your awesome title" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-10-12T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"前言","@type":"BlogPosting","url":"http://localhost:4000/2018/10/12/JekyllSettingUps.html","headline":"用Jekyll配置GitHub Pages上自己的博客","dateModified":"2018-10-12T00:00:00+08:00","datePublished":"2018-10-12T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/10/12/JekyllSettingUps.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Your awesome title" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Your awesome title</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">用Jekyll配置GitHub Pages上自己的博客</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-10-12T00:00:00+08:00" itemprop="datePublished">Oct 12, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="前言">前言</h2>
+
+<p>GitHub提供的GitHub Pages服务非常方便，可以让程序员迅速的建立起自己的博客。
+GitHub Pages提供了简洁高效的新手引导，可以非常快速的建立起一个基础的博客
+项目，而该项目即是博客。但是这仅限于Hello World的水平。在GitHub Help页面
+能找到<a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/">Setting up your GitHub Pages site locally with Jekyll</a>
+教程。故决定按照教程走，充实自己的博客。</p>
+
+<h2 id="step-1-rubybundler-installation">Step 1: Ruby&amp;Bundler Installation</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get install ruby
+<span class="nv">$ </span>ruby <span class="nt">-v</span>
+ruby 2.3.3p222 <span class="o">(</span>2016-11-21<span class="o">)</span> <span class="o">[</span>x86_64-linux-gnu]
+<span class="nv">$ </span>gem install bundler
+<span class="nv">$ </span>bundler <span class="nt">-v</span>
+Bundler version 1.16.6
+</code></pre></div></div>
+
+<p>gem是指用ruby语言写的类库，类似c的lib或是java的jar文件；而bundler便是用来
+管理这些gem的gem，类似python的pip之类的工具。</p>
+
+<h2 id="step-2-jekyll-installation">Step 2: Jekyll Installation</h2>
+
+<p>Jekyll是ruby的一个gem，由于已经安装了bundler，自然可以用它来安装Jekyll。</p>
+
+<h3 id="step-21">Step 2.1</h3>
+
+<p>首先进入项目文件夹，此处为~/Project/yunyexiao.github.io/。一般该文件夹
+下没有Gemfile文件，故需生成。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle init
+</code></pre></div></div>
+
+<p>该命令在项目根目录下生成了一个简单的Gemfile文件。内容大概为：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># frozen_string_literal: true
+
+source "https://rubygems.org"
+
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+
+# gem "rails"
+</code></pre></div></div>
+
+<p>虽然看不太懂，不过没关系。当然也可以手动新建这个文件。</p>
+
+<h3 id="step-22">Step 2.2</h3>
+
+<p>接着修改这个Gemfile文件。根据GitHub Help的引导，需要添加一行：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem 'github-pages', group: :jekyll_plugins
+</code></pre></div></div>
+
+<h3 id="step-23">Step 2.3</h3>
+
+<p>正式的安装Jekyll及其依赖。从这里开始就踩坑了。理论上只需要执行下面这句命
+令：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle install
+</code></pre></div></div>
+<p>然而，中国大陆有着坚固的万里长城。这里按下回车后会卡住，或是半天后提示连
+接超时。</p>
+
+<h4 id="solution-1-mirror">Solution 1: Mirror</h4>
+
+<p>首先尝试一些镜像。理论上，只需要将Gemfile中<code class="highlighter-rouge">source</code>一行的源改为大陆可访问
+的镜像即可。然而，<code class="highlighter-rouge">http://ruby.taobao.org/</code>，<code class="highlighter-rouge">https://gems.ruby-china.org/</code>
+均已无效。<strong>然而<code class="highlighter-rouge">https://gems.ruby-china.com/</code>有效</strong>，ruby-china不过是换了
+个域名，这一点我后来才发现。尝试了前两个镜像后，我稍带失望，只能另寻他路。</p>
+
+<h4 id="solution-2-proxy">Solution 2: Proxy</h4>
+
+<p>接着开始尝试给终端翻墙。以前翻墙都是采用SSR或是修改浏览器配置实现的，如今
+必须手动设置终端的代理。经实验，可以使用SSR+privoxy的方式实现。SSR已安装，
+故不再次赘述。安装privoxy:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get install privoxy
+<span class="nv">$ </span>privoxy <span class="nt">--version</span>
+Privoxy version 3.0.26 <span class="o">(</span>https://www.privoxy.org/<span class="o">)</span>
+</code></pre></div></div>
+
+<p>进入/etc/privoxy目录下修改config文件，加入<code class="highlighter-rouge">forward-socks5 / 127.0.0.1:
+1080 .</code>，保存退出。这是采用全局代理，不使用PAC模式是因为PAC需要一个PAC
+列表，有点麻烦。接着，</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:8118
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:8118
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">no_proxy</span><span class="o">=</span>localhost
+<span class="nv">$ </span>systemctl start privoxy.service
+</code></pre></div></div>
+
+<p>其中8118是privoxy默认的监听端口。注意，此处export命令的使用注定了这个代理
+规则仅适用于本次登录的终端，退出该终端后便失效。最后一条命令中start替换为
+stop即可结束该服务。</p>
+
+<h4 id="problem-commonmarker-installation-error">Problem: commonmarker installation error</h4>
+
+<p>终于能在终端科学上网了，<code class="highlighter-rouge">purl www.google.com</code>成功把谷歌首页的源代码输出了。
+接着便是在项目根目录下执行<code class="highlighter-rouge">bundle install</code>。这次很多依赖都成功下载完成，然
+而在安装时，又来了一个新坑:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An error occurred <span class="k">while </span>installing commonmarker <span class="o">(</span>0.17.13<span class="o">)</span>, and Bundler
+cannot <span class="k">continue</span><span class="nb">.</span>
+Make sure that <span class="sb">`</span>gem install commonmarker <span class="nt">-v</span> <span class="s1">'0.17.13'</span> <span class="nt">--source</span>
+<span class="s1">'https://gems.ruby-china.com/'</span><span class="sb">`</span> succeeds before bundling.
+
+In Gemfile:
+  github-pages was resolved to 192, which depends on
+    jekyll-commonmark-ghpages was resolved to 0.1.5, which depends on
+      jekyll-commonmark was resolved to 1.2.0, which depends on
+        commonmarker
+</code></pre></div></div>
+
+<p>按照错误提示输入<code class="highlighter-rouge">gem install commonmarker -...</code>命令后：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Fetching: commonmarker-0.17.13.gem <span class="o">(</span>100%<span class="o">)</span>
+ERROR:  While executing gem ... <span class="o">(</span>Gem::FilePermissionError<span class="o">)</span>
+    You don<span class="s1">'t have write permissions for the /var/lib/gems/2.3.0 directory.
+</span></code></pre></div></div>
+
+<p>前面加上了sudo前缀后：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:  Error installing commonmarker:
+	ERROR: Failed to build gem native extension.
+
+    current directory: /var/lib/gems/2.3.0/gems/commonmarker-0.17.13/ext/commonmarker
+/usr/bin/ruby2.3 <span class="nt">-r</span> ./siteconf20181012-11498-15xwmw7.rb extconf.rb
+mkmf.rb can<span class="s1">'t find header files for ruby at /usr/lib/ruby/include/ruby.h
+
+extconf failed, exit code 1
+
+Gem files will remain installed in /var/lib/gems/2.3.0/gems/commonmarker-0.17.13 for inspection.
+Results logged to /var/lib/gems/2.3.0/extensions/x86_64-linux/2.3.0/commonmarker-0.17.13/gem_make.out
+</span></code></pre></div></div>
+
+<p>经过艰苦卓决的google，终于成功安装了commonmarker：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get install ruby2.3-dev
+...<span class="o">(</span>此处省略<span class="o">)</span>
+<span class="nv">$ </span><span class="nb">sudo </span>gem install commonmarker <span class="nt">-v</span> <span class="s1">'0.17.13'</span> <span class="nt">--source</span> <span class="s1">'https://rubygems.org/'</span>
+Building native extensions.  This could take a <span class="k">while</span>...
+Successfully installed commonmarker-0.17.13
+Parsing documentation <span class="k">for </span>commonmarker-0.17.13
+Installing ri documentation <span class="k">for </span>commonmarker-0.17.13
+Done installing documentation <span class="k">for </span>commonmarker after 1 seconds
+1 gem installed
+</code></pre></div></div>
+
+<p>原来是缺少ruby-dev包的相关文件。接着再次执行<code class="highlighter-rouge">bundle install</code>命令，看到下
+面这条后，终于算是安装完了：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Post-install message from html-pipeline:
+<span class="nt">-------------------------------------------------</span>
+Thank you <span class="k">for </span>installing html-pipeline!
+You must bundle Filter gem dependencies.
+See html-pipeline README.md <span class="k">for </span>more details.
+https://github.com/jch/html-pipeline#dependencies
+<span class="nt">-------------------------------------------------</span>
+</code></pre></div></div>
+
+<h2 id="step-3-construct-the-jekyll-structure">Step 3: Construct the Jekyll Structure</h2>
+
+<p>接下来就简单多了，完全没遇到坑。</p>
+
+<p>另找一个目录（最好不要在现有的github仓库下）执行如下命令：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle <span class="nb">exec </span>jekyll _3.3.0_ new JekyllBlog
+</code></pre></div></div>
+
+<p>当然，<code class="highlighter-rouge">JekyllBlog</code>可以换成任意其他名字，这会在当前目录生成一个对应的项目。
+接着cd进去编辑其中的Gemfile文件，删除其中的<code class="highlighter-rouge">gem "jekyll", "~&gt; 3.7.4"</code>这
+一行并将<code class="highlighter-rouge">gem "github-pages", group: :jekyll_plugins</code>这行前面的注释符号<code class="highlighter-rouge">#</code>
+去除。</p>
+
+<p>运行方式：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>jekyll s
+Configuration file: /home/aruji/Project/yunyexiao.github.io/_config.yml
+            Source: /home/aruji/Project/yunyexiao.github.io
+       Destination: /home/aruji/Project/yunyexiao.github.io/_site
+ Incremental build: disabled. Enable with <span class="nt">--incremental</span>
+      Generating... 
+                    <span class="k">done in </span>0.192 seconds.
+ Auto-regeneration: enabled <span class="k">for</span> <span class="s1">'/home/aruji/Project/yunyexiao.github.io'</span>
+    Server address: http://127.0.0.1:4000/
+  Server running... press ctrl-c to stop.
+</code></pre></div></div>
+<p>打开<code class="highlighter-rouge">http://localhost:4000</code>就可以查看效果了。</p>
+
+<h2 id="step-4-add-it-to-git-repo">Step 4: Add it to Git Repo</h2>
+
+<p>接着有三种方式利用这些自动生成的文件。</p>
+
+<ol>
+  <li>
+    <p>若没有github pages的博客项目，则干脆把这个项目作为博客，注意必须将项目
+名改为<code class="highlighter-rouge">&lt;github-username&gt;.github.io</code>，其中<code class="highlighter-rouge">&lt;github-username&gt;</code>替换为自己的
+github用户名；然后在github远端也建立同名仓库，关联起来。所有在这个仓库的
+master分支上的网页都会变为博客的一部分。</p>
+  </li>
+  <li>
+    <p>若有对应的博客项目，将这里的Jekyll项目中的文件复制过去即可。只要有Gem
+file，就可以利用<code class="highlighter-rouge">jekyll s</code>命令运行。</p>
+  </li>
+  <li>
+    <p>还可以将该项目关联至一个任意其他github仓库如RepoA，并将变动提交至
+<code class="highlighter-rouge">gh-jekyll</code>分支(若没有就新建)，这个分支上的md文件也会变为博客的一部分。但
+是，这里的url是:<code class="highlighter-rouge">http://&lt;github-username&gt;.github.io/&lt;repo-name&gt;</code>。其中
+<code class="highlighter-rouge">&lt;github-username&gt;</code>是github用户名，<code class="highlighter-rouge">&lt;repo-name&gt;</code>是仓库名RepoA。</p>
+  </li>
+</ol>
+
+<p>所以以上三种方法的区别在于：方法1、2对应的博客地址为<code class="highlighter-rouge">http://&lt;github-usern
+ame&gt;.github.io/</code>而方法3为<code class="highlighter-rouge">http://&lt;github-username&gt;.github.io/&lt;repo-name&gt;</code>。
+方法3可以看做是为特定项目所作的博客。</p>
+
+<p>本人选择了方法2。</p>
+
+<h2 id="step-5-push-and-enjoy">Step 5: Push and Enjoy</h2>
+
+<p>剩下的事情就是git add-commit-push一条龙服务了。</p>
+
+
+  </div><a class="u-url" href="/2018/10/12/JekyllSettingUps.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Your awesome title</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Your awesome title</li><li><a class="u-email" href="mailto:your-email@example.com">your-email@example.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
