@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-12T18:54:08+08:00</updated><id>http://localhost:4000/</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2018/10/12/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2018-10-12T18:45:51+08:00</published><updated>2018-10-12T18:45:51+08:00</updated><id>http://localhost:4000/jekyll/update/2018/10/12/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2018/10/12/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>恽叶霄的博客</title>
+		<description>Software Developer</description>
+		<link></link>
+		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>Welcome to Jekyll!</title>
+				<description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
 &lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
@@ -10,4 +20,209 @@
 &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+				<pubDate>Fri, 12 Oct 2018 18:45:51 +0800</pubDate>
+				<link>/2018/10/welcome-to-jekyll/</link>
+				<guid isPermaLink="true">/2018/10/welcome-to-jekyll/</guid>
+			</item>
+		
+			<item>
+				<title>Jekyll + GitHub Pages = Blog</title>
+				<description>&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;GitHub提供的GitHub Pages服务非常方便，可以让程序员迅速的建立起自己的博客。GitHub Pages提供了简洁高效的新手引导，可以非常快速的建立起一个基础的博客项目，而该项目即是博客。但是这仅限于Hello World的水平。在GitHub Help页面能找到&lt;a href=&quot;https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/&quot;&gt;Setting up your GitHub Pages site locally with Jekyll&lt;/a&gt;教程。故决定按照教程走，充实自己的博客。&lt;/p&gt;
+
+&lt;h2 id=&quot;step-1-rubybundler-installation&quot;&gt;Step 1: Ruby&amp;amp;Bundler Installation&lt;/h2&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install ruby
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+ruby 2.3.3p222 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2016-11-21&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x86_64-linux-gnu]
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install bundler
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundler &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+Bundler version 1.16.6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;gem是指用ruby语言写的类库，类似c的lib或是java的jar文件；而bundler便是用来管理这些gem的gem，类似python的pip之类的工具。&lt;/p&gt;
+
+&lt;h2 id=&quot;step-2-jekyll-installation&quot;&gt;Step 2: Jekyll Installation&lt;/h2&gt;
+
+&lt;p&gt;Jekyll是ruby的一个gem，由于已经安装了bundler，自然可以用它来安装Jekyll。&lt;/p&gt;
+
+&lt;h3 id=&quot;step-21&quot;&gt;Step 2.1&lt;/h3&gt;
+
+&lt;p&gt;首先进入项目文件夹，此处为~/Project/yunyexiao.github.io/。一般该文件夹下没有Gemfile文件，故需生成。&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;该命令在项目根目录下生成了一个简单的Gemfile文件。内容大概为：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# frozen_string_literal: true
+
+source &quot;https://rubygems.org&quot;
+
+git_source(:github) {|repo_name| &quot;https://github.com/#{repo_name}&quot; }
+
+# gem &quot;rails&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;虽然看不太懂，不过没关系。当然也可以手动新建这个文件。&lt;/p&gt;
+
+&lt;h3 id=&quot;step-22&quot;&gt;Step 2.2&lt;/h3&gt;
+
+&lt;p&gt;接着修改这个Gemfile文件。根据GitHub Help的引导，需要添加一行：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem 'github-pages', group: :jekyll_plugins
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;step-23&quot;&gt;Step 2.3&lt;/h3&gt;
+
+&lt;p&gt;正式的安装Jekyll及其依赖。从这里开始就踩坑了。理论上只需要执行下面这句命令：&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;然而，中国大陆有着坚固的万里长城。这里按下回车后会卡住，或是半天后提示连接超时。&lt;/p&gt;
+
+&lt;h4 id=&quot;solution-1-mirror&quot;&gt;Solution 1: Mirror&lt;/h4&gt;
+
+&lt;p&gt;首先尝试一些镜像。理论上，只需要将Gemfile中&lt;code class=&quot;highlighter-rouge&quot;&gt;source&lt;/code&gt;一行的源改为大陆可访问的镜像即可。然而，&lt;code class=&quot;highlighter-rouge&quot;&gt;http://ruby.taobao.org/&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;https://gems.ruby-china.org/&lt;/code&gt;均已无效。&lt;strong&gt;然而&lt;code class=&quot;highlighter-rouge&quot;&gt;https://gems.ruby-china.com/&lt;/code&gt;有效&lt;/strong&gt;，ruby-china不过是换了个域名，这一点我后来才发现。尝试了前两个镜像后，我稍带失望，只能另寻他路。&lt;/p&gt;
+
+&lt;h4 id=&quot;solution-2-proxy&quot;&gt;Solution 2: Proxy&lt;/h4&gt;
+
+&lt;p&gt;接着开始尝试给终端翻墙。以前翻墙都是采用SSR或是修改浏览器配置实现的，如今必须手动设置终端的代理。经实验，可以使用SSR+privoxy的方式实现。SSR已安装，故不再次赘述。安装privoxy:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install privoxy
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;privoxy &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+Privoxy version 3.0.26 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;https://www.privoxy.org/&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;进入/etc/privoxy目录下修改config文件，加入&lt;code class=&quot;highlighter-rouge&quot;&gt;forward-socks5 / 127.0.0.1:1080 .&lt;/code&gt;，保存退出。这是采用全局代理，不使用PAC模式是因为PAC需要一个PAC列表，有点麻烦。接着，&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;http_proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://127.0.0.1:8118
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;https_proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://127.0.0.1:8118
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;no_proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;localhost
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl start privoxy.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其中8118是privoxy默认的监听端口。注意，此处export命令的使用注定了这个代理规则仅适用于本次登录的终端，退出该终端后便失效。最后一条命令中start替换为stop即可结束该服务。&lt;/p&gt;
+
+&lt;h4 id=&quot;problem-commonmarker-installation-error&quot;&gt;Problem: commonmarker installation error&lt;/h4&gt;
+
+&lt;p&gt;终于能在终端科学上网了，&lt;code class=&quot;highlighter-rouge&quot;&gt;purl www.google.com&lt;/code&gt;成功把谷歌首页的源代码输出了。接着便是在项目根目录下执行&lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt;。这次很多依赖都成功下载完成，然而在安装时，又来了一个新坑:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;An error occurred &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;installing commonmarker &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.17.13&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, and Bundler
+cannot &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Make sure that &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;gem install commonmarker &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'0.17.13'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--source&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;'https://gems.ruby-china.com/'&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; succeeds before bundling.
+
+In Gemfile:
+  github-pages was resolved to 192, which depends on
+    jekyll-commonmark-ghpages was resolved to 0.1.5, which depends on
+      jekyll-commonmark was resolved to 1.2.0, which depends on
+        commonmarker
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;按照错误提示输入&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install commonmarker -...&lt;/code&gt;命令后：&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Fetching: commonmarker-0.17.13.gem &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;100%&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+ERROR:  While executing gem ... &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Gem::FilePermissionError&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    You don&lt;span class=&quot;s1&quot;&gt;'t have write permissions for the /var/lib/gems/2.3.0 directory.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;前面加上了sudo前缀后：&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ERROR:  Error installing commonmarker:
+	ERROR: Failed to build gem native extension.
+
+    current directory: /var/lib/gems/2.3.0/gems/commonmarker-0.17.13/ext/commonmarker
+/usr/bin/ruby2.3 &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; ./siteconf20181012-11498-15xwmw7.rb extconf.rb
+mkmf.rb can&lt;span class=&quot;s1&quot;&gt;'t find header files for ruby at /usr/lib/ruby/include/ruby.h
+
+extconf failed, exit code 1
+
+Gem files will remain installed in /var/lib/gems/2.3.0/gems/commonmarker-0.17.13 for inspection.
+Results logged to /var/lib/gems/2.3.0/extensions/x86_64-linux/2.3.0/commonmarker-0.17.13/gem_make.out
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;经过艰苦卓决的google，终于成功安装了commonmarker：&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install ruby2.3-dev
+...&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;此处省略&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;gem install commonmarker &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'0.17.13'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--source&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://rubygems.org/'&lt;/span&gt;
+Building native extensions.  This could take a &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;...
+Successfully installed commonmarker-0.17.13
+Parsing documentation &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;commonmarker-0.17.13
+Installing ri documentation &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;commonmarker-0.17.13
+Done installing documentation &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;commonmarker after 1 seconds
+1 gem installed
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;原来是缺少ruby-dev包的相关文件。接着再次执行&lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt;命令，看到下面这条后，终于算是安装完了：&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Post-install message from html-pipeline:
+&lt;span class=&quot;nt&quot;&gt;-------------------------------------------------&lt;/span&gt;
+Thank you &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;installing html-pipeline!
+You must bundle Filter gem dependencies.
+See html-pipeline README.md &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;more details.
+https://github.com/jch/html-pipeline#dependencies
+&lt;span class=&quot;nt&quot;&gt;-------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;step-3-construct-the-jekyll-structure&quot;&gt;Step 3: Construct the Jekyll Structure&lt;/h2&gt;
+
+&lt;p&gt;接下来就简单多了，完全没遇到坑。&lt;/p&gt;
+
+&lt;p&gt;另找一个目录（最好不要在现有的github仓库下）执行如下命令：&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll _3.3.0_ new JekyllBlog
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;当然，&lt;code class=&quot;highlighter-rouge&quot;&gt;JekyllBlog&lt;/code&gt;可以换成任意其他名字，这会在当前目录生成一个对应的项目。接着cd进去编辑其中的Gemfile文件，删除其中的&lt;code class=&quot;highlighter-rouge&quot;&gt;gem &quot;jekyll&quot;, &quot;~&amp;gt; 3.7.4&quot;&lt;/code&gt;这一行并将&lt;code class=&quot;highlighter-rouge&quot;&gt;gem &quot;github-pages&quot;, group: :jekyll_plugins&lt;/code&gt;这行前面的注释符号&lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt;去除。&lt;/p&gt;
+
+&lt;p&gt;运行方式：&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jekyll s
+Configuration file: /home/aruji/Project/yunyexiao.github.io/_config.yml
+            Source: /home/aruji/Project/yunyexiao.github.io
+       Destination: /home/aruji/Project/yunyexiao.github.io/_site
+ Incremental build: disabled. Enable with &lt;span class=&quot;nt&quot;&gt;--incremental&lt;/span&gt;
+      Generating... 
+                    &lt;span class=&quot;k&quot;&gt;done in &lt;/span&gt;0.192 seconds.
+ Auto-regeneration: enabled &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/home/aruji/Project/yunyexiao.github.io'&lt;/span&gt;
+    Server address: http://127.0.0.1:4000/
+  Server running... press ctrl-c to stop.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;打开&lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4000&lt;/code&gt;就可以查看效果了。&lt;/p&gt;
+
+&lt;h2 id=&quot;step-4-add-it-to-git-repo&quot;&gt;Step 4: Add it to Git Repo&lt;/h2&gt;
+
+&lt;p&gt;接着有三种方式利用这些自动生成的文件。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;若没有github pages的博客项目，则干脆把这个项目作为博客，注意必须将项目名改为&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;github-username&amp;gt;.github.io&lt;/code&gt;，其中&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;github-username&amp;gt;&lt;/code&gt;替换为自己的github用户名；然后在github远端也建立同名仓库，关联起来。所有在这个仓库的master分支上的网页都会变为博客的一部分。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;若有对应的博客项目，将这里的Jekyll项目中的文件复制过去即可。只要有Gemfile，就可以利用&lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll s&lt;/code&gt;命令运行。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;还可以将该项目关联至一个任意其他github仓库如RepoA，并将变动提交至&lt;code class=&quot;highlighter-rouge&quot;&gt;gh-jekyll&lt;/code&gt;分支(若没有就新建)，这个分支上的md文件也会变为博客的一部分。但是，这里的url是:&lt;code class=&quot;highlighter-rouge&quot;&gt;http://&amp;lt;github-username&amp;gt;.github.io/&amp;lt;repo-name&amp;gt;&lt;/code&gt;。其中&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;github-username&amp;gt;&lt;/code&gt;是github用户名，&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;repo-name&amp;gt;&lt;/code&gt;是仓库名RepoA。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;所以以上三种方法的区别在于：方法1、2对应的博客地址为&lt;code class=&quot;highlighter-rouge&quot;&gt;http://&amp;lt;github-username&amp;gt;.github.io/&lt;/code&gt;而方法3为&lt;code class=&quot;highlighter-rouge&quot;&gt;http://&amp;lt;github-username&amp;gt;.github.io/&amp;lt;repo-name&amp;gt;&lt;/code&gt;。方法3可以看做是为特定项目所作的博客。本人选择了方法2。&lt;/p&gt;
+
+&lt;h2 id=&quot;step-5-push-and-enjoy&quot;&gt;Step 5: Push and Enjoy&lt;/h2&gt;
+
+&lt;p&gt;剩下的事情就是git add-commit-push一条龙服务了。&lt;/p&gt;
+
+</description>
+				<pubDate>Fri, 12 Oct 2018 00:00:00 +0800</pubDate>
+				<link>/2018/10/JekyllSettingUps/</link>
+				<guid isPermaLink="true">/2018/10/JekyllSettingUps/</guid>
+			</item>
+		
+	</channel>
+</rss>
