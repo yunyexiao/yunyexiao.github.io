@@ -1,16 +1,15 @@
 ---
 layout: post
-title: "用Jekyll配置GitHub Pages上自己的博客"
+title: "Jekyll + GitHub Pages = Blog"
+description: 用Jekyll在GitHub Pages上创建博客。
 date: 2018-10-12 Fri
+tags: jekyll
+toc: true
 ---
 
 ## 前言
 
-GitHub提供的GitHub Pages服务非常方便，可以让程序员迅速的建立起自己的博客。
-GitHub Pages提供了简洁高效的新手引导，可以非常快速的建立起一个基础的博客
-项目，而该项目即是博客。但是这仅限于Hello World的水平。在GitHub Help页面
-能找到[Setting up your GitHub Pages site locally with Jekyll][gh-jekyll]
-教程。故决定按照教程走，充实自己的博客。
+GitHub提供的GitHub Pages服务非常方便，可以让程序员迅速的建立起自己的博客。GitHub Pages提供了简洁高效的新手引导，可以非常快速的建立起一个基础的博客项目，而该项目即是博客。但是这仅限于Hello World的水平。在GitHub Help页面能找到[Setting up your GitHub Pages site locally with Jekyll][gh-jekyll]教程。故决定按照教程走，充实自己的博客。
 
 [gh-jekyll]: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
 
@@ -25,8 +24,7 @@ $ bundler -v
 Bundler version 1.16.6
 ```
 
-gem是指用ruby语言写的类库，类似c的lib或是java的jar文件；而bundler便是用来
-管理这些gem的gem，类似python的pip之类的工具。
+gem是指用ruby语言写的类库，类似c的lib或是java的jar文件；而bundler便是用来管理这些gem的gem，类似python的pip之类的工具。
 
 ## Step 2: Jekyll Installation
 
@@ -34,8 +32,7 @@ Jekyll是ruby的一个gem，由于已经安装了bundler，自然可以用它来
 
 ### Step 2.1
 
-首先进入项目文件夹，此处为~/Project/yunyexiao.github.io/。一般该文件夹
-下没有Gemfile文件，故需生成。
+首先进入项目文件夹，此处为~/Project/yunyexiao.github.io/。一般该文件夹下没有Gemfile文件，故需生成。
 
 ```sh
 $ bundle init
@@ -65,27 +62,20 @@ gem 'github-pages', group: :jekyll_plugins
 
 ### Step 2.3
 
-正式的安装Jekyll及其依赖。从这里开始就踩坑了。理论上只需要执行下面这句命
-令：
+正式的安装Jekyll及其依赖。从这里开始就踩坑了。理论上只需要执行下面这句命令：
 
 ```sh
 $ bundle install
 ```
-然而，中国大陆有着坚固的万里长城。这里按下回车后会卡住，或是半天后提示连
-接超时。
+然而，中国大陆有着坚固的万里长城。这里按下回车后会卡住，或是半天后提示连接超时。
 
 #### Solution 1: Mirror
 
-首先尝试一些镜像。理论上，只需要将Gemfile中`source`一行的源改为大陆可访问
-的镜像即可。然而，`http://ruby.taobao.org/`，`https://gems.ruby-china.org/`
-均已无效。**然而`https://gems.ruby-china.com/`有效**，ruby-china不过是换了
-个域名，这一点我后来才发现。尝试了前两个镜像后，我稍带失望，只能另寻他路。
+首先尝试一些镜像。理论上，只需要将Gemfile中`source`一行的源改为大陆可访问的镜像即可。然而，`http://ruby.taobao.org/`，`https://gems.ruby-china.org/`均已无效。**然而`https://gems.ruby-china.com/`有效**，ruby-china不过是换了个域名，这一点我后来才发现。尝试了前两个镜像后，我稍带失望，只能另寻他路。
 
 #### Solution 2: Proxy
 
-接着开始尝试给终端翻墙。以前翻墙都是采用SSR或是修改浏览器配置实现的，如今
-必须手动设置终端的代理。经实验，可以使用SSR+privoxy的方式实现。SSR已安装，
-故不再次赘述。安装privoxy:
+接着开始尝试给终端翻墙。以前翻墙都是采用SSR或是修改浏览器配置实现的，如今必须手动设置终端的代理。经实验，可以使用SSR+privoxy的方式实现。SSR已安装，故不再次赘述。安装privoxy:
 
 ```sh
 $ sudo apt-get install privoxy
@@ -93,9 +83,7 @@ $ privoxy --version
 Privoxy version 3.0.26 (https://www.privoxy.org/)
 ```
 
-进入/etc/privoxy目录下修改config文件，加入`forward-socks5 / 127.0.0.1:
-1080 .`，保存退出。这是采用全局代理，不使用PAC模式是因为PAC需要一个PAC
-列表，有点麻烦。接着，
+进入/etc/privoxy目录下修改config文件，加入`forward-socks5 / 127.0.0.1:1080 .`，保存退出。这是采用全局代理，不使用PAC模式是因为PAC需要一个PAC列表，有点麻烦。接着，
 
 ```sh
 $ export http_proxy=http://127.0.0.1:8118
@@ -104,15 +92,11 @@ $ export no_proxy=localhost
 $ systemctl start privoxy.service
 ```
 
-其中8118是privoxy默认的监听端口。注意，此处export命令的使用注定了这个代理
-规则仅适用于本次登录的终端，退出该终端后便失效。最后一条命令中start替换为
-stop即可结束该服务。
+其中8118是privoxy默认的监听端口。注意，此处export命令的使用注定了这个代理规则仅适用于本次登录的终端，退出该终端后便失效。最后一条命令中start替换为stop即可结束该服务。
 
 #### Problem: commonmarker installation error
 
-终于能在终端科学上网了，`purl www.google.com`成功把谷歌首页的源代码输出了。
-接着便是在项目根目录下执行`bundle install`。这次很多依赖都成功下载完成，然
-而在安装时，又来了一个新坑:
+终于能在终端科学上网了，`purl www.google.com`成功把谷歌首页的源代码输出了。接着便是在项目根目录下执行`bundle install`。这次很多依赖都成功下载完成，然而在安装时，又来了一个新坑:
 
 ```sh
 An error occurred while installing commonmarker (0.17.13), and Bundler
@@ -165,8 +149,7 @@ Done installing documentation for commonmarker after 1 seconds
 1 gem installed
 ```
 
-原来是缺少ruby-dev包的相关文件。接着再次执行`bundle install`命令，看到下
-面这条后，终于算是安装完了：
+原来是缺少ruby-dev包的相关文件。接着再次执行`bundle install`命令，看到下面这条后，终于算是安装完了：
 
 ```sh
 Post-install message from html-pipeline:
@@ -188,10 +171,7 @@ https://github.com/jch/html-pipeline#dependencies
 $ bundle exec jekyll _3.3.0_ new JekyllBlog
 ```
 
-当然，`JekyllBlog`可以换成任意其他名字，这会在当前目录生成一个对应的项目。
-接着cd进去编辑其中的Gemfile文件，删除其中的`gem "jekyll", "~> 3.7.4"`这
-一行并将`gem "github-pages", group: :jekyll_plugins`这行前面的注释符号`#`
-去除。
+当然，`JekyllBlog`可以换成任意其他名字，这会在当前目录生成一个对应的项目。接着cd进去编辑其中的Gemfile文件，删除其中的`gem "jekyll", "~> 3.7.4"`这一行并将`gem "github-pages", group: :jekyll_plugins`这行前面的注释符号`#`去除。
 
 运行方式：
 
@@ -213,24 +193,13 @@ Configuration file: /home/aruji/Project/yunyexiao.github.io/_config.yml
 
 接着有三种方式利用这些自动生成的文件。
 
-1. 若没有github pages的博客项目，则干脆把这个项目作为博客，注意必须将项目
-名改为`<github-username>.github.io`，其中`<github-username>`替换为自己的
-github用户名；然后在github远端也建立同名仓库，关联起来。所有在这个仓库的
-master分支上的网页都会变为博客的一部分。
+1. 若没有github pages的博客项目，则干脆把这个项目作为博客，注意必须将项目名改为`<github-username>.github.io`，其中`<github-username>`替换为自己的github用户名；然后在github远端也建立同名仓库，关联起来。所有在这个仓库的master分支上的网页都会变为博客的一部分。
 
-2. 若有对应的博客项目，将这里的Jekyll项目中的文件复制过去即可。只要有Gem
-file，就可以利用`jekyll s`命令运行。
+2. 若有对应的博客项目，将这里的Jekyll项目中的文件复制过去即可。只要有Gemfile，就可以利用`jekyll s`命令运行。
 
-3. 还可以将该项目关联至一个任意其他github仓库如RepoA，并将变动提交至
-`gh-jekyll`分支(若没有就新建)，这个分支上的md文件也会变为博客的一部分。但
-是，这里的url是:`http://<github-username>.github.io/<repo-name>`。其中
-`<github-username>`是github用户名，`<repo-name>`是仓库名RepoA。
+3. 还可以将该项目关联至一个任意其他github仓库如RepoA，并将变动提交至`gh-jekyll`分支(若没有就新建)，这个分支上的md文件也会变为博客的一部分。但是，这里的url是:`http://<github-username>.github.io/<repo-name>`。其中`<github-username>`是github用户名，`<repo-name>`是仓库名RepoA。
 
-所以以上三种方法的区别在于：方法1、2对应的博客地址为`http://<github-usern
-ame>.github.io/`而方法3为`http://<github-username>.github.io/<repo-name>`。
-方法3可以看做是为特定项目所作的博客。
-
-本人选择了方法2。
+所以以上三种方法的区别在于：方法1、2对应的博客地址为`http://<github-username>.github.io/`而方法3为`http://<github-username>.github.io/<repo-name>`。方法3可以看做是为特定项目所作的博客。本人选择了方法2。
 
 ## Step 5: Push and Enjoy
 
