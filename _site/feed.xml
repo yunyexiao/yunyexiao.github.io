@@ -7,6 +7,391 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Archlinux Installation</title>
+				<description>&lt;h1 id=&quot;the-installation-of-arch-linux&quot;&gt;The Installation of Arch Linux&lt;/h1&gt;
+
+&lt;h2 id=&quot;1-pre-installation&quot;&gt;1. Pre-installation&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-device-and-environment&quot;&gt;1.1 Device and Environment&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Computer 0: An old-fashion computer, got from NJU software institution as I am a student here.&lt;/li&gt;
+  &lt;li&gt;OS 0: Ubuntu 17.&lt;/li&gt;
+  &lt;li&gt;Computer 1: An ordinary dell laptop, for personal use.&lt;/li&gt;
+  &lt;li&gt;OS 1: Windows 10.&lt;/li&gt;
+  &lt;li&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;.iso&lt;/code&gt; file of arch linux, released at 2018-11-01. In my case, it was &lt;code class=&quot;highlighter-rouge&quot;&gt;archlinux-2018.11.01-x86_64.iso&lt;/code&gt;, only about 600MB.&lt;/li&gt;
+  &lt;li&gt;A usb drive of at least 1GB total space, which would later hold the &lt;code class=&quot;highlighter-rouge&quot;&gt;.iso&lt;/code&gt; above. In my case, it has 60GB total space.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;12-usb-preparation&quot;&gt;1.2 Usb Preparation&lt;/h3&gt;
+&lt;p&gt;First backup all files from usb to computer 0. My usb is a Kingston Usb 3.0. It was automatically mounted to /media/aruji/Kinston when I plugged it into the computer. Attention, backup &lt;strong&gt;ALL&lt;/strong&gt; files, including those in other partitions if multiple partitions exist. The usb should be totally &lt;strong&gt;freed&lt;/strong&gt; before loading that &lt;code class=&quot;highlighter-rouge&quot;&gt;.iso&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkdir /media/aruji/kst-bk
+# cp -r /media/aruji/Kingston/* /media/aruji/kst-bk/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After this, delete all partitions on usb. I used &lt;code class=&quot;highlighter-rouge&quot;&gt;disks&lt;/code&gt; util on Ubuntu. It has GUI and that makes things easier. Also, using &lt;code class=&quot;highlighter-rouge&quot;&gt;fdisk&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;gdisk&lt;/code&gt; ctl is suggested. Supposing the &lt;code class=&quot;highlighter-rouge&quot;&gt;.iso&lt;/code&gt; file is in &lt;code class=&quot;highlighter-rouge&quot;&gt;kst-bk/other&lt;/code&gt; and the usb is &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/sdb&lt;/code&gt;, you should &lt;code class=&quot;highlighter-rouge&quot;&gt;umount&lt;/code&gt; the usb first, and then:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# dd bs=4M if=/media/aruji/kst-bk/other/archlinux-2018.11.01-x86_64.iso of=/dev/sdb status=progress oflag=sync
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After that the usb would be divided into 3 parts: ARCH_201811 of &lt;code class=&quot;highlighter-rouge&quot;&gt;0x00&lt;/code&gt; partition type, 641MB, ARCHISO_EFI of EFI (FAT-12/16/32) partition type, 67MB and free space left. Now, the usb is ready for installation.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-installation&quot;&gt;2 Installation&lt;/h2&gt;
+
+&lt;h3 id=&quot;20-reboot&quot;&gt;2.0 Reboot&lt;/h3&gt;
+&lt;p&gt;Reboot computer 0, and on its booting, long press F12 key to death. After a few seconds, a temporary boot selection dialog shows up and select UEFI Kingston without hesitation. (This boot selection is just one-time only, to change it permenantly, press Delete on PC or F2 on laptop upon booting to get into Boot Configuration of your computer.) When the following 5 choices show up, it is successful:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Arch Linux archiso x86_64 UEFI CD
+UEFI Shell x86_64 v1
+UEFI Shell x86_64 v2
+EFI Default Loader
+Reboot Into Firmware Interface
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Of course, select the first choice and wait seconds. Root would get logged in automatically on tty1 in zsh. On tty2-6, manually log in as root by typing ‘root’, no pwd needed.&lt;/p&gt;
+
+&lt;h3 id=&quot;21-keyboard-configuration&quot;&gt;2.1 Keyboard Configuration&lt;/h3&gt;
+&lt;p&gt;As a chinese on mainland, I didn’t change the kb conf. US keyboard is pretty good. Also, keyboard layouts can be found by:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ls /usr/share/kbd/keymaps/**/*.map.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;and loaded by:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# loadkeys [kbmap]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Resolt to &lt;a href=&quot;https://wiki.archlinux.org/index.php/Installation_guide#Set_the_keyboard_layout&quot;&gt;Arch Wiki Installation Guide&lt;/a&gt; for more help.&lt;/p&gt;
+
+&lt;h3 id=&quot;22-network-configuration&quot;&gt;2.2 Network Configuration&lt;/h3&gt;
+&lt;p&gt;Use &lt;code class=&quot;highlighter-rouge&quot;&gt;ping archlinux.org&lt;/code&gt; to test if network is accessible at present.&lt;/p&gt;
+
+&lt;h4 id=&quot;221-wired-connection&quot;&gt;2.2.1 Wired Connection&lt;/h4&gt;
+&lt;p&gt;On computer 0, though it can connect to wired ethernet automatically, but it can only connect to campus network and need logging in with username and pwd. &lt;del&gt;Way too troublesome!&lt;/del&gt; So I decided to use my smart phone’s shared network. Connecting my smart phone with computer 0 by a usb wire, opening USB tethering on smart phone, and check network interfaces:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ip link
+1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65535 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+	link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp5s0: &amp;lt;NO-CARRIER,BROADCAST,MULTICAST,UP&amp;gt; mtu 1500 qdisc fd_codel state DOWN mode DEFAULT group default qlen 1000
+	link/ether 34:97:f6:88:70:91 brd ff:ff:ff:ff:ff:ff
+3: enp0s20f0u1: &amp;lt;BROADCAST,MULTICAST&amp;gt; mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
+	link/ether 56:dd:4d:e8:b7:9c brd ff:ff:ff:ff:ff:ff
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As I suppose, &lt;code class=&quot;highlighter-rouge&quot;&gt;enp5s0&lt;/code&gt; should connect to the campus network and &lt;code class=&quot;highlighter-rouge&quot;&gt;enp0s20f0u1&lt;/code&gt; to the network from my phone. Do not look at words after angle-brackets. From words inside those angle-brackets, we see that &lt;code class=&quot;highlighter-rouge&quot;&gt;enp5s0&lt;/code&gt; is UP and &lt;code class=&quot;highlighter-rouge&quot;&gt;enp0s20f0u1&lt;/code&gt; is not up(say, is down). Inactivate the former one and activate the latter:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ip link set dev enp5s0 down
+# ip link set dev enp0s20f0u1 up
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Get an ip address on the up-interface using dhcp:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# dhcpcd enp0s20f0u1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Check it:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ifconfig
+enp0s20f0u1: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt; mtu 1500
+	inet 192.168.42.20 netmast 255.255.255.0 broadcast 192.168.42.255
+	inet6 fe80::54dd:4dff:fee8:b79c prefixlen 64 scopeid 0x20&amp;lt;link&amp;gt;
+	...(other info)
+# ping archlinux.org
+PING archlinux.org (138.201.81.199) 56(84) bytes of data.
+64 bytes from apollo.archlinux.org ....
+...
+^C
+--- archlinux.org ping statistics ---
+3 packets tranmitted, 2 received, 33.3333% packet loss, time 3ms
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Success!&lt;/p&gt;
+
+&lt;h4 id=&quot;222-wireless-connection&quot;&gt;2.2.2 Wireless Connection&lt;/h4&gt;
+&lt;p&gt;On computer 1(my laptop), I decided to try wireless network configuration this time. According to Arch Wiki, there are many ways to do it, and I chose &lt;code class=&quot;highlighter-rouge&quot;&gt;wpa_supplicant&lt;/code&gt; tool.&lt;/p&gt;
+
+&lt;p&gt;First of all, generate a wifi config to file &lt;code class=&quot;highlighter-rouge&quot;&gt;wpa.conf&lt;/code&gt;(the file name can be any string valid in Arch Linux):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# wpa_passphrase &quot;(Your wifi name)&quot; &quot;(Your wifi password)&quot; &amp;gt; wpa.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, check your wifi interface, configure and activate it:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ip link show
+...
+3: wlp6s0: ...
+...
+# ip link set wlp6s0 up
+# wpa_supplicant -i wlp6s0 -c wpa.conf &amp;amp;
+# dhcpcd wlp6s0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And you’ll be done. Use &lt;code class=&quot;highlighter-rouge&quot;&gt;ping archlinux.org&lt;/code&gt; to varify connection.&lt;/p&gt;
+
+&lt;h3 id=&quot;23-system-clock-update&quot;&gt;2.3 System Clock Update&lt;/h3&gt;
+&lt;p&gt;Use &lt;code class=&quot;highlighter-rouge&quot;&gt;timedatectl&lt;/code&gt;. To activate network time synchronization:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# timedatectl set-ntp true
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To check the status:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# timedatectl status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;These cmds above would be enough, I suppose.&lt;/p&gt;
+
+&lt;h3 id=&quot;24-disk-partition&quot;&gt;2.4 Disk Partition&lt;/h3&gt;
+&lt;p&gt;First use &lt;code class=&quot;highlighter-rouge&quot;&gt;lsblk&lt;/code&gt; to check disks. In my case, the disk I wanna spare was &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/sda&lt;/code&gt; (300GiB free space prepared). Also you can use &lt;code class=&quot;highlighter-rouge&quot;&gt;fdisk -l&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;gdisk&lt;/code&gt;. Then use &lt;code class=&quot;highlighter-rouge&quot;&gt;fdisk&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;gdisk&lt;/code&gt; to partition that free space. &lt;strong&gt;Attention&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;fdisk&lt;/code&gt; can work on both MBR and GPT but &lt;code class=&quot;highlighter-rouge&quot;&gt;gdisk&lt;/code&gt; only on GPT. Do not make mistakes with fdisk and gdisk!&lt;/p&gt;
+
+&lt;h4 id=&quot;241-partition-plan-0&quot;&gt;2.4.1 Partition Plan 0&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;300GiB for /&lt;/li&gt;
+  &lt;li&gt;8GiB for swap (existing)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It would fit most of the cases. Actually, nowadays for a personal PC you do not have to split your disk into several parts and mount them to different directories. Life will be much easier.&lt;/p&gt;
+
+&lt;p&gt;So, I made the only partition left a primary partition by fdisk (on &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/sda4&lt;/code&gt;), and change its type to Linux LVM. Then, creating Physical Volume (PV), according to the partition before:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# pvcreate /dev/sda4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then create a volume group (VG):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# vgcreate vg1 /dev/sda4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then create several logical volume (LV):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# lvcreate -L 20G -n root vg1
+# lvcreate -L 300M -n boot vg1
+# lvcreate -L 20G -n var vg1
+# lvcreate -L 40G -n usr vg1
+# lvcreate -L 70G -n home vg1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;242-partition-plan-1&quot;&gt;2.4.2 Partition Plan 1&lt;/h4&gt;
+&lt;p&gt;On my laptop (Computer 1), 300GB of free disk space was available. But according to my experience, I only need a half of it for Arch Linux. Also, for a more extendable partition, I used Linux LVM. All of 300GB of free disk space was used by my only volume group ‘yume’, and then I created several logical volumes like (this is not the final partition plan):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# lvcreate -L 0.2G -n arch-boot yume
+# lvcreate -L 6G -n arch-root yume
+# lvcreate -L 20G -n arch-var yume
+# lvcreate -L 60G -n arch-usr yume
+# lvcreate -L 60G -n arch-home yume
+# lvcreate -L 3.8G -n swap yume
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Often, right after arch has been installed on your computer, the usage of each partitions would be like:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/boot: about 70M
+/: about 10M
+/var: about 200M
+/usr: about 1.1G
+/home: &amp;lt; 1M
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;But as we know, /home would be of main use from now on, so giving /home enough space would be better. Also, /usr is used to install all kinds of softwares, it also needs a lot of space. /var is often used for logs and some data for servers, so if your computer is not gonna to be a server, no need to give it so much. For my case, I was just afraid of some future tasks related to SQL server so spared it with 20G and I think it’s enough for it. /boot will hardly change, and other parts of / does not contain anything huge, just some config files and special or temp files, so / will cost little space. For swap, just the same size as my RAM.&lt;/p&gt;
+
+&lt;p&gt;After several weeks’ use, I found that /opt is an important directory in that each program that do not follow &lt;em&gt;Linux Standard Layout&lt;/em&gt; (which contains /bin /etc /lib /share or others) will be installed in /opt. So I spared another 20G for /opt, otherwise my root directory would be filled up.&lt;/p&gt;
+
+&lt;p&gt;(The following steps from 2.5 are the same as described in &lt;a href=&quot;https://wiki.archlinux.org/index.php/Installation_guide#Format_the_partitions&quot;&gt;Arch Wiki&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;h3 id=&quot;25-formatting-partitions&quot;&gt;2.5 Formatting Partitions&lt;/h3&gt;
+&lt;p&gt;Format partitions all:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkfs.ext4 /dev/vg1/root
+# mkfs.ext4 /dev/vg1/boot
+# mkfs.ext4 /dev/vg1/var
+# mkfs.ext4 /dev/vg1/usr
+# mkfs.ext4 /dev/vg1/home
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;26-mount-partitions&quot;&gt;2.6 Mount Partitions&lt;/h3&gt;
+&lt;p&gt;On computer 0:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mount /dev/vg1/root /mnt
+# mkdir /mnt/boot
+# mkdir /mnt/var
+# mkdir /mnt/usr
+# mkdir /mnt/home
+# mount /dev/vg1/boot /mnt/boot
+# mount /dev/vg1/var /mnt/var
+# mount /dev/vg1/usr /mnt/usr
+# mount /dev/vg1/home /mnt/home
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;On computer 1 (laptop), just add an ESP (&lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/sda1&lt;/code&gt;, usually it’s the 1st part of your GPT disk):&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkdir /mnt/efi
+# mount /dev/sda1 /mnt/efi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When dealing with GPT, see &lt;a href=&quot;https://wiki.archlinux.org/index.php/EFI_system_partition#Mount_the_partition&quot;&gt;Arch Wiki EFI&lt;/a&gt; for more infomation. The mount solution here may not fit other cases.&lt;/p&gt;
+
+&lt;p&gt;On whatever computer, if you have a swap partition or swap file, let’s say it is &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/yume/swap&lt;/code&gt;, then:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkswap /dev/yume/swap
+# swapon /dev/yume/swap
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;to format and activate it.&lt;/p&gt;
+
+&lt;h3 id=&quot;27-base-package-installation&quot;&gt;2.7 Base Package Installation&lt;/h3&gt;
+&lt;p&gt;First of all, mirror servers might need changing. Edit the file &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/pacman.d/mirrorlist&lt;/code&gt;. Put your favourate mirror on the first line. In my case, Tsinghua mirror was chosen for my installation (BTW my .iso file is from Tsinghua mirror too). Check network connection again and then install the base packages:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# pacstrap /mnt base
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;28-fstab-file-generation&quot;&gt;2.8 Fstab File Generation&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# genfstab -U /mnt &amp;gt;&amp;gt; /mnt/etc/fstab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;29-change-root-into-new-system&quot;&gt;2.9 Change root into new System&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# arch-chroot /mnt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Attention. From now on, you cannot use vim. Use vi or nano instead. Using &lt;code class=&quot;highlighter-rouge&quot;&gt;pacman -S vim&lt;/code&gt; to install vim makes sense too.&lt;/p&gt;
+
+&lt;h3 id=&quot;210-time-and-locales&quot;&gt;2.10 Time and Locales&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+# hwclock --systohc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/locale.gen&lt;/code&gt;, uncomment &lt;code class=&quot;highlighter-rouge&quot;&gt;en_US.UTF-8 UTF-8&lt;/code&gt; and all Chinese and Japanese locales, then:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# locale-gen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/locale.conf&lt;/code&gt; file with contents below:&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;LANG&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;en_US&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;UTF&lt;/span&gt;-&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If using different keyboard(such as de-latin1), create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/vconsole.conf&lt;/code&gt; with contents below:&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;KEYMAP&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;de&lt;/span&gt;-&lt;span class=&quot;n&quot;&gt;latin1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;211-hosts-and-hostname-confuguration&quot;&gt;2.11 Hosts and Hostname Confuguration&lt;/h3&gt;
+&lt;p&gt;Create and configure hostname in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/hostname&lt;/code&gt; file with contents below, in my case I use ‘fairy’ as hostname:&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;fairy&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Configure hosts in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/hosts&lt;/code&gt; file with contents below:&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;m&quot;&gt;127&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;localhost&lt;/span&gt;
+::&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;		&lt;span class=&quot;n&quot;&gt;localhost&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;127&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;fairy&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(Here ‘fairy’ is your hostname. Keep it same as in /etc/hostname.)&lt;/p&gt;
+
+&lt;h3 id=&quot;212-root-password&quot;&gt;2.12 Root Password&lt;/h3&gt;
+&lt;p&gt;Set root password:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# passwd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;213-mkinitcpio-configuration&quot;&gt;2.13 Mkinitcpio Configuration&lt;/h3&gt;
+&lt;p&gt;First, in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/lvm/lvm.conf&lt;/code&gt;, on Line 921:&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;use_lvmetad&lt;/span&gt; = &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Keep it that way at present. We would have to change it when we are going to set Boot Loader in the next step.&lt;/p&gt;
+
+&lt;p&gt;Second, in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mkinitcpio.conf&lt;/code&gt;, on Line 52:&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;HOOKS&lt;/span&gt;=(&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;udev&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;autodetect&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modconf&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filesystems&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyboard&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fsck&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add 2 hooks &lt;code class=&quot;highlighter-rouge&quot;&gt;lvm2&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;usr&lt;/code&gt; like the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;HOOKS&lt;/span&gt;=(&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;udev&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;autodetect&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modconf&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lvm2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filesystems&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyboard&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fsck&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usr&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lvm2&lt;/code&gt; for LVM we used, and &lt;code class=&quot;highlighter-rouge&quot;&gt;usr&lt;/code&gt; for that we made &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr&lt;/code&gt; as a seperate partition. Because /sbin is a symlink to /usr/bin, so if /usr is not loaded right after root it will prompt something like &lt;code class=&quot;highlighter-rouge&quot;&gt;ERROR: root device mounted successfully, but /sbin/init does not exist.&lt;/code&gt; Seems mounting other devices would come after initialization and it failed on the latter stage because of the lack of /usr at that point. Finally, run the following cmd to re-create &lt;em&gt;initramfs&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkinitcpio -p linux
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;214-boot-loader&quot;&gt;2.14 Boot Loader&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Attention&lt;/strong&gt;, all steps above would just change some unimportant data in your disk. However, this step, as you might already know, if done in a wrong way, may cause some huge &lt;strong&gt;problems&lt;/strong&gt; that your computer COULD NOT get you into OS or even worse. Fully prepare yourself before continue. This log cannot serve as a tutorial in this area. Resolt to other meterials like books, wiki or experts.&lt;/p&gt;
+
+&lt;h4 id=&quot;2141-biosmbr-disk&quot;&gt;2.14.1 BIOS/MBR disk&lt;/h4&gt;
+&lt;p&gt;For my computer 0, it’s of BIOS system and its disk is of MBR type. I did not wanna change the disk type, cuz this computer didn’t belong to me. So the following instructions are for BIOS/MBR. Also, you can resolt to Arch Wiki for BIOS/GPT or more info.&lt;/p&gt;
+
+&lt;p&gt;Prepare packages:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# pacman -S grub
+# pacman -S os-prober
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;os-prober&lt;/code&gt; is a util for auto-check all other os kernels and add them into grub conf. Now we can move on.&lt;/p&gt;
+
+&lt;p&gt;Here, edit the conf of lvm first. Edit /etc/lvm/lvm.conf file, change the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;use_lvmetad&lt;/code&gt; from 1 to 0 on Line 921:&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;use_lvmetad&lt;/span&gt; = &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then run:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# grub-install --target=i386-pc /dev/sda
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If conf of lvm not changed as above, errors would occur (I don’t know why). Then add &lt;code class=&quot;highlighter-rouge&quot;&gt;lvm&lt;/code&gt; after all modules of &lt;code class=&quot;highlighter-rouge&quot;&gt;GRUB_PRELOAD_MODULES&lt;/code&gt; in the conf file &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/default/grub&lt;/code&gt;. Mount all kernels’ partitions under any position and make conf file by:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# grub-mkconfig -o /boot/grub/grub.cfg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When this cmd is running, it would print out all kernels’ name on tty.&lt;/p&gt;
+
+&lt;p&gt;But in my case, windows 7 image was not detected. I manually edited the boot configuration file and added the window 7 image boot section.&lt;/p&gt;
+
+&lt;h4 id=&quot;2142-uefigpt-disk&quot;&gt;2.14.2 UEFI/GPT disk&lt;/h4&gt;
+&lt;p&gt;For my laptop(computer 1), install &lt;code class=&quot;highlighter-rouge&quot;&gt;grub&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;efibootmgr&lt;/code&gt; packages. Before install grub, change a config first, in /etc/lvm/lvm.conf, line 921:&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;use_lvmetad&lt;/span&gt; = &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then make sure you have mounted your ESP, and:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Remember to change the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;--efi-directory&lt;/code&gt; to the mount point of your ESP.&lt;/p&gt;
+
+&lt;p&gt;Then is all the same as 2.14.1. Add &lt;code class=&quot;highlighter-rouge&quot;&gt;lvm&lt;/code&gt; after all modules of &lt;code class=&quot;highlighter-rouge&quot;&gt;GRUB_PRELOAD_MODULES&lt;/code&gt; in the conf file &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/default/grub&lt;/code&gt;, and then mount all kernels’ partitions under any position and make conf file by:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# grub-mkconfig -o /boot/grub/grub.cfg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here, I have to say, it still failed to find my pre-installed windows 10. But after I rebooted into Archlinux and run the command again, it successfully found windows 10 image.&lt;/p&gt;
+
+&lt;h3 id=&quot;215-finally&quot;&gt;2.15 Finally&lt;/h3&gt;
+&lt;p&gt;Exit chroot environment:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# exit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl+D&lt;/code&gt; also works. Then unmount all partitions with:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# umount -R /mnt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally, type:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# reboot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;and wait. &lt;strong&gt;DO NOT REMOVE USB&lt;/strong&gt; until the reboot finishes!&lt;/p&gt;
+
+</description>
+				<pubDate>Fri, 07 Dec 2018 00:00:00 +0800</pubDate>
+				<link>/2018/12/ArchlinuxInstallation/</link>
+				<guid isPermaLink="true">/2018/12/ArchlinuxInstallation/</guid>
+			</item>
+		
+			<item>
 				<title>Welcome to Jekyll!</title>
 				<description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
