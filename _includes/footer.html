@@ -1,8 +1,13 @@
-    <footer class="footer-distributed">
-      <div class="container">
-        <div class="footer">
-          <p>{{ site.author }} &copy; {{ site.copyright }}</p>
-          {% include social.html %}
-        </div>
-      </div>
-    </footer>
+{% if site.theme_settings.footer_text %}
+<footer class="site-footer">
+    <p class="text">{{ site.theme_settings.footer_text }}</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                {% include icons.html %}
+                </ul>
+            </div>
+</footer>
+{% endif %}
+
+
